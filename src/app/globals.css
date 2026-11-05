@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Brand — Okotoks Humane Society */
+  --ohs-navy: #00548b;
+  --ohs-sky: #5da8de;
+  --ohs-white: #ffffff;
+  --ohs-navy-soft: #e8f1f7;
+  --ohs-sky-soft: #eef6fc;
+  --ohs-mist: #f5f9fc;
+
+  --background: var(--ohs-mist);
+  --foreground: var(--ohs-navy);
+  --card: var(--ohs-white);
+  --card-foreground: var(--ohs-navy);
+  --primary: var(--ohs-navy);
+  --primary-foreground: var(--ohs-white);
+  --secondary: var(--ohs-sky);
+  --secondary-foreground: var(--ohs-white);
+  --muted: #4a6f88;
+  --muted-foreground: #3d5f78;
+  --accent: var(--ohs-sky-soft);
+  --accent-foreground: var(--ohs-navy);
+  --border: #c5d8e6;
+  --ring: var(--ohs-sky);
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-ohs-navy: var(--ohs-navy);
+  --color-ohs-sky: var(--ohs-sky);
+  --color-ohs-navy-soft: var(--ohs-navy-soft);
+  --color-ohs-sky-soft: var(--ohs-sky-soft);
+  --color-ohs-mist: var(--ohs-mist);
+  --font-sans: var(--font-source-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ohs-sky) 35%, white);
+  color: var(--ohs-navy);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-drift {
+  from {
+    transform: translateX(-1.5%);
+  }
+  to {
+    transform: translateX(1.5%);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.7s ease-out 0.15s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.7s ease-out 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-fade-up-delay-2 {
+    animation: none;
+  }
+}
