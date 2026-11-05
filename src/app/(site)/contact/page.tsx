@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contact-form";
+import { PageHero } from "@/components/page-hero";
 import {
   Card,
   CardContent,
@@ -15,19 +16,17 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-xl space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Contact</h1>
-        <p className="text-neutral-600">
-          Send a message. Delivery uses Resend when API keys are configured.
-        </p>
-      </header>
+    <div className="mx-auto max-w-xl space-y-8 px-4 py-12 sm:px-6">
+      <PageHero
+        title="Contact"
+        description="Questions about adopting, volunteering, or supporting the shelter? Send us a message."
+      />
       <Card>
         <CardHeader>
           <CardTitle>Get in touch</CardTitle>
           <CardDescription>
-            Messages are emailed via the{" "}
-            <code className="text-xs">/api/contact</code> route.
+            We aim to respond as soon as we can. Fields are large and clearly
+            labelled for easy use on any device.
           </CardDescription>
         </CardHeader>
         <CardContent>

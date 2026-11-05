@@ -9,7 +9,7 @@ export default function SiteLayout({
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">{children}</main>
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </>
   );

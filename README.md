@@ -1,6 +1,6 @@
 # Okotoks Humane Society Website
 
-Skeletal Next.js website for the Okotoks Humane Society with Sanity CMS, Resend contact email, and Google Analytics hooks.
+Next.js website for the Okotoks Humane Society with Sanity CMS, Resend contact email, and Google Analytics hooks. Brand styling uses the official logo blues (navy `#00548B`, sky `#5DA8DE`).
 
 ## Stack
 
@@ -10,6 +10,12 @@ Skeletal Next.js website for the Okotoks Humane Society with Sanity CMS, Resend 
 - **Resend** — `/api/contact` email delivery
 - **Google Analytics** — via `@next/third-parties` when `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set
 - **Vercel**-ready (`vercel.json`) + GitHub Actions CI
+
+## Brand & media
+
+- Logo: `public/ohs-logo.png` (used in header, hero, and footer)
+- CSS variables in `src/app/globals.css` map navy/sky to primary/secondary
+- **Temporary stock photos** live in `public/placeholders/` (hero, adopt, volunteer, community). They are Unsplash stand-ins until real shelter photography is available — replace these files and keep clear alt text.
 
 ## Quick start
 
@@ -91,11 +97,13 @@ vercel
 ## Project layout
 
 ```
-src/app/(site)/     Public pages (home, news, events, jobs, contact, pages)
+src/app/(site)/     Public pages (home, about, news, events, jobs, contact, donate, pages)
 src/app/studio/     Embedded Sanity Studio
 src/app/api/contact Resend contact API
 src/components/ui/  shadcn/ui primitives
+src/components/brand/ Logo helpers + wave motif
 src/sanity/         Schemas, client, queries, fetch helpers
+public/placeholders/ Temporary stock images (replace with real photos)
 ```
 
 ## CI

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Source_Sans_3 } from "next/font/google";
 
 import { Analytics } from "@/components/analytics/google-analytics";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -21,7 +22,10 @@ export const metadata: Metadata = {
     template: "%s · Okotoks Humane Society",
   },
   description:
-    "Website scaffold for the Okotoks Humane Society — news, events, jobs, and pages.",
+    "Okotoks Humane Society — caring for animals and connecting them with loving homes.",
+  icons: {
+    icon: "/ohs-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -32,9 +36,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         {children}
         <Analytics />
       </body>

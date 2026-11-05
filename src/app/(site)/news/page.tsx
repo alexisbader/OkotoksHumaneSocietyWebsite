@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { EmptyState } from "@/components/empty-state";
+import { PageHero } from "@/components/page-hero";
 import { getNewsList } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
@@ -12,34 +13,34 @@ export default async function NewsIndexPage() {
   const news = await getNewsList();
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">News</h1>
-        <p className="text-neutral-600">Updates and announcements.</p>
-      </header>
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-12 sm:px-6">
+      <PageHero
+        title="News"
+        description="Updates and announcements from Okotoks Humane Society."
+      />
 
       {news.length === 0 ? (
         <EmptyState
           title="No news yet"
-          description="Add News documents in Sanity Studio to populate this list."
+          description="Add News documents in Sanity Studio to populate this list. Placeholder layout stays on-brand until then."
         />
       ) : (
-        <ul className="divide-y divide-neutral-200 border-y border-neutral-200">
+        <ul className="divide-y divide-border border-y border-border">
           {news.map((item) => (
-            <li key={item._id} className="py-5">
+            <li key={item._id} className="py-6">
               <Link
                 href={`/news/${item.slug}`}
-                className="text-lg font-medium text-neutral-900 hover:underline"
+                className="text-xl font-semibold text-ohs-navy hover:underline"
               >
                 {item.title}
               </Link>
               {item.publishedAt ? (
-                <p className="mt-1 text-sm text-neutral-500">
+                <p className="mt-1 text-base text-muted-foreground">
                   {new Date(item.publishedAt).toLocaleDateString()}
                 </p>
               ) : null}
               {item.summary ? (
-                <p className="mt-2 text-sm text-neutral-600">{item.summary}</p>
+                <p className="mt-2 text-base text-muted-foreground">{item.summary}</p>
               ) : null}
             </li>
           ))}
