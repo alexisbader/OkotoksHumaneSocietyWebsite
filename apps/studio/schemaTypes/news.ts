@@ -1,9 +1,11 @@
+import {DocumentTextIcon} from '@sanity/icons/DocumentText'
 import {defineField, defineType} from 'sanity'
 
 export const newsType = defineType({
   name: 'news',
   title: 'News',
   type: 'document',
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: 'title',

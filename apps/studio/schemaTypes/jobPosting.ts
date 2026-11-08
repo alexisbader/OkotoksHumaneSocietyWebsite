@@ -1,9 +1,11 @@
+import {CaseIcon} from '@sanity/icons/Case'
 import {defineField, defineType} from 'sanity'
 
 export const jobPostingType = defineType({
   name: 'jobPosting',
   title: 'Job posting',
   type: 'document',
+  icon: CaseIcon,
   fields: [
     defineField({
       name: 'title',
