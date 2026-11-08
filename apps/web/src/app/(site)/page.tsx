@@ -4,36 +4,34 @@ import Link from "next/link";
 import { WaveDivider } from "@/components/brand/wave-divider";
 import { Button } from "@/components/ui/button";
 import { PortableBody } from "@/components/portable-text";
+import { urlFor } from "@/sanity/lib/image";
 import { getEventsList, getHomePage, getNewsList } from "@/sanity/lib/fetch";
 import { isSanityConfigured } from "@/sanity/env";
 
 const waysToHelp = [
   {
-    title: "Adopt",
-    description:
-      "Meet animals looking for a forever home. Adoption listings will appear here once the CMS is connected.",
-    href: "/contact",
-    cta: "Ask about adopting",
-    image: "/placeholders/adopt.jpg",
-    alt: "Golden retriever resting outdoors — temporary placeholder photo",
+    title: "Donate",
+    description: "Your gift supports food, medical care, and shelter for animals in need.",
+    href: "/donate/individual",
+    cta: "Give today",
+    image: "/placeholders/community.jpg",
+    alt: "Person holding a small dog — temporary placeholder photo",
   },
   {
     title: "Volunteer",
-    description:
-      "Lend a hand with walks, enrichment, events, and day-to-day care. Every hour helps.",
-    href: "/jobs",
+    description: "Lend a hand with events, adoption days, and day-to-day shelter support.",
+    href: "/volunteer/openings",
     cta: "See opportunities",
     image: "/placeholders/volunteer.jpg",
     alt: "Happy dog in grass — temporary placeholder photo",
   },
   {
-    title: "Donate",
-    description:
-      "Your gift supports food, medical care, and shelter for animals in need.",
-    href: "/donate",
-    cta: "Give today",
-    image: "/placeholders/community.jpg",
-    alt: "Person holding a small dog — temporary placeholder photo",
+    title: "Careers",
+    description: "Join our team — browse open roles at Okotoks Humane Society.",
+    href: "/careers",
+    cta: "View openings",
+    image: "/placeholders/adopt.jpg",
+    alt: "Golden retriever resting outdoors — temporary placeholder photo",
   },
 ] as const;
 
@@ -44,10 +42,13 @@ export default async function HomePage() {
     getEventsList(),
   ]);
 
-  const welcomeTitle = home?.title || "Welcome to Okotoks Humane Society";
-  const welcomeSummary =
-    home?.summary ||
+  const heroHeading = home?.heroHeading || "Welcome to Okotoks Humane Society";
+  const heroSubheading =
+    home?.heroSubheading ||
     "We care for animals and help them find loving homes in our community.";
+  const buildingImageUrl = home?.buildingImage
+    ? urlFor(home.buildingImage).width(1200).height(900).fit("crop").url()
+    : null;
 
   return (
     <div>
@@ -56,11 +57,9 @@ export default async function HomePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
           <div className="animate-fade-up space-y-6 text-white">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="text-gradient-sky">{welcomeTitle}</span>
+              <span className="text-gradient-sky">{heroHeading}</span>
             </h1>
-            <p className="max-w-xl text-lg text-white/85 sm:text-xl">
-              {welcomeSummary}
-            </p>
+            <p className="max-w-xl text-lg text-white/85 sm:text-xl">{heroSubheading}</p>
             <div className="animate-fade-up-delay flex flex-wrap gap-3">
               <Button asChild size="lg" variant="secondary">
                 <Link href="/contact">Contact us</Link>
@@ -71,7 +70,7 @@ export default async function HomePage() {
                 variant="outline"
                 className="border-white/70 bg-white/5 text-white backdrop-blur hover:border-white hover:bg-white/15"
               >
-                <Link href="/donate">Donate</Link>
+                <Link href="/donate/individual">Donate</Link>
               </Button>
             </div>
             {!isSanityConfigured ? (
@@ -83,8 +82,12 @@ export default async function HomePage() {
           </div>
           <div className="animate-fade-up-delay relative min-h-[240px] overflow-hidden rounded-3xl shadow-lifted ring-1 ring-white/10 lg:min-h-[380px]">
             <Image
-              src="/placeholders/hero-pets.jpg"
-              alt="Two dogs outdoors — temporary placeholder photo until shelter photos are added"
+              src={buildingImageUrl || "/placeholders/hero-pets.jpg"}
+              alt={
+                buildingImageUrl
+                  ? "Photo of the Okotoks Humane Society shelter building"
+                  : "Two dogs outdoors — temporary placeholder photo until a building photo is added in Sanity"
+              }
               fill
               priority
               className="object-cover"
@@ -95,11 +98,20 @@ export default async function HomePage() {
         <WaveDivider className="absolute bottom-0 left-0 text-ohs-mist" />
       </section>
 
-      {home?.body?.length ? (
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-          <PortableBody value={home.body} />
-        </section>
-      ) : null}
+      {/* About us */}
+      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+        <h2 className="text-3xl font-bold text-ohs-navy">{home?.aboutHeading || "About Us"}</h2>
+        {home?.aboutBody?.length ? (
+          <div className="mt-4">
+            <PortableBody value={home.aboutBody} />
+          </div>
+        ) : (
+          <p className="mt-4 text-lg text-muted-foreground">
+            This section is ready for staff to edit in Sanity Studio — open the
+            Home document and fill in the About Us body.
+          </p>
+        )}
+      </section>
 
       {/* Ways to help — one job: invite action */}
       <section className="bg-background px-4 py-16 sm:px-6">
@@ -107,7 +119,7 @@ export default async function HomePage() {
           <div className="max-w-2xl space-y-2">
             <h2 className="text-3xl font-bold text-ohs-navy">Ways to help</h2>
             <p className="text-lg text-muted-foreground">
-              Whether you adopt, volunteer, or donate, you make a difference.
+              Whether you donate, volunteer, or join our team, you make a difference.
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-3">

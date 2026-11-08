@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -73,6 +74,13 @@ export function ContactForm() {
         <Label htmlFor="message">Message</Label>
         <Textarea id="message" name="message" required />
       </div>
+      <p className="text-sm text-muted-foreground">
+        By submitting this form, you agree to our{" "}
+        <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-ohs-navy">
+          Privacy Policy
+        </Link>
+        .
+      </p>
       <Button type="submit" disabled={status === "loading"}>
         {status === "loading" ? "Sending…" : "Send message"}
       </Button>

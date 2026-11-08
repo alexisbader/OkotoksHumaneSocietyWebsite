@@ -3,21 +3,24 @@ import type { Metadata } from "next";
 
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
-import { getNewsList } from "@/sanity/lib/fetch";
+import { PortableBody } from "@/components/portable-text";
+import { getNewsList, getNewsPage } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "News",
 };
 
 export default async function NewsIndexPage() {
-  const news = await getNewsList();
+  const [page, news] = await Promise.all([getNewsPage(), getNewsList()]);
 
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-12 sm:px-6">
-      <PageHero
-        title="News"
-        description="Updates and announcements from Okotoks Humane Society."
-      />
+      <PageHero title="News" />
+      {page?.intro?.length ? (
+        <div className="max-w-2xl">
+          <PortableBody value={page.intro} />
+        </div>
+      ) : null}
 
       {news.length === 0 ? (
         <EmptyState

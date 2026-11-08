@@ -35,3 +35,19 @@ export function PortableBody({ value }: { value?: PortableBlock[] }) {
 
   return <PortableText value={value} components={components} />;
 }
+
+const compactComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => (
+      <p className="mb-2 text-sm leading-relaxed text-muted-foreground last:mb-0">{children}</p>
+    ),
+  },
+};
+
+export function CompactPortableText({ value }: { value?: PortableBlock[] }) {
+  if (!value?.length) {
+    return null;
+  }
+
+  return <PortableText value={value} components={compactComponents} />;
+}

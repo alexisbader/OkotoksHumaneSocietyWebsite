@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { getContactPage } from "@/sanity/lib/fetch";
+import { isValidEmail } from "@/lib/validate-email";
+
 type ContactPayload = {
   name?: string;
   email?: string;
   subject?: string;
   message?: string;
 };
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
 
 export async function POST(request: Request) {
   let body: ContactPayload;
@@ -38,7 +37,8 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_TO_EMAIL;
+  const contactPage = await getContactPage();
+  const toEmail = process.env.CONTACT_TO_EMAIL || contactPage?.email;
   const fromEmail =
     process.env.CONTACT_FROM_EMAIL || "Okotoks Humane Society <onboarding@resend.dev>";
 
