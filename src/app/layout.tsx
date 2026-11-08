@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "Okotoks Humane Society — caring for animals and connecting them with loving homes.",
   icons: {
-    icon: "/ohs-logo.png",
+    icon: "/ohs-logo-icon.png",
   },
 };
 

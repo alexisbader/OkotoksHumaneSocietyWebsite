@@ -28,7 +28,7 @@ export default async function JobsPage() {
           {jobs.map((job) => (
             <li
               key={job._id}
-              className="rounded-xl border border-border bg-white p-6 shadow-sm"
+              className="hover-lift rounded-2xl border border-border/80 bg-white p-6 shadow-soft hover:shadow-elevated"
             >
               <h2 className="text-xl font-semibold text-ohs-navy">{job.title}</h2>
               <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-base text-muted-foreground">

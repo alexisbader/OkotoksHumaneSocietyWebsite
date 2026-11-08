@@ -24,7 +24,7 @@ export default async function AboutPage() {
               "We are a community organization dedicated to animal welfare, responsible pet care, and finding forever homes."
             }
           />
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-elevated">
             <Image
               src="/placeholders/community.jpg"
               alt="Person holding a small dog — temporary placeholder photo"

@@ -10,7 +10,8 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <header className={cn("space-y-3", className)}>
+    <header className={cn("space-y-4", className)}>
+      <span className="block h-1.5 w-12 rounded-full bg-gradient-to-r from-ohs-sky to-ohs-navy" />
       <h1 className="text-3xl font-bold tracking-tight text-ohs-navy sm:text-4xl">
         {title}
       </h1>

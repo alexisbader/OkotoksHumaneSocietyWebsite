@@ -25,10 +25,10 @@ export function SiteLogo({
       <Image
         src="/ohs-logo.png"
         alt="Okotoks Humane Society logo — cat and dog silhouettes over blue hills"
-        width={64}
-        height={64}
+        width={166}
+        height={90}
         priority={priority}
-        className="h-12 w-12 sm:h-14 sm:w-14"
+        className="h-12 w-auto sm:h-14"
       />
       {showWordmark ? (
         <span className="flex flex-col leading-tight">

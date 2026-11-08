@@ -6,9 +6,9 @@ import { mainNav } from "@/lib/nav";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto bg-ohs-navy text-white">
+    <footer className="mt-auto bg-gradient-to-b from-ohs-navy to-ohs-ink text-white">
       <WaveDivider flip className="bg-background text-ohs-sky" />
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr]">
         <div className="space-y-4">
           <Link
             href="/"
@@ -17,9 +17,9 @@ export function SiteFooter() {
             <Image
               src="/ohs-logo.png"
               alt="Okotoks Humane Society logo"
-              width={56}
-              height={56}
-              className="h-14 w-14 rounded-full bg-white p-1"
+              width={166}
+              height={90}
+              className="h-14 w-auto drop-shadow-[0_6px_16px_rgba(0,0,0,0.3)]"
             />
             <span className="flex flex-col leading-tight">
               <span className="text-lg font-bold tracking-wide">OKOTOKS</span>
@@ -28,13 +28,13 @@ export function SiteFooter() {
               </span>
             </span>
           </Link>
-          <p className="max-w-md text-base text-white/85">
+          <p className="max-w-md text-base text-white/75">
             Caring for animals and connecting them with loving homes in the
             Okotoks community.
           </p>
         </div>
         <div>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-ohs-sky">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-ohs-sky-bright">
             Explore
           </p>
           <ul className="grid grid-cols-2 gap-2 text-base">
@@ -42,25 +42,29 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="inline-flex min-h-11 items-center rounded-md px-1 hover:underline"
+                  className="group inline-flex min-h-11 items-center rounded-md px-1 text-white/85 transition-colors hover:text-white"
                 >
-                  {item.label}
+                  <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-ohs-sky-bright">
+                    {item.label}
+                  </span>
                 </Link>
               </li>
             ))}
             <li>
               <Link
                 href="/studio"
-                className="inline-flex min-h-11 items-center rounded-md px-1 text-white/70 hover:underline"
+                className="group inline-flex min-h-11 items-center rounded-md px-1 text-white/55 transition-colors hover:text-white/80"
               >
-                Studio
+                <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-white/50">
+                  Studio
+                </span>
               </Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/15">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-sm text-white/70 sm:px-6">
+      <div className="border-t border-white/10">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-white/60 sm:px-6">
           © Okotoks Humane Society
         </p>
       </div>

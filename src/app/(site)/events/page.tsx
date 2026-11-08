@@ -28,7 +28,7 @@ export default async function EventsPage() {
           {events.map((event) => (
             <li
               key={event._id}
-              className="rounded-xl border border-border bg-white p-6 shadow-sm"
+              className="hover-lift rounded-2xl border border-border/80 bg-white p-6 shadow-soft hover:shadow-elevated"
             >
               <h2 className="text-xl font-semibold text-ohs-navy">{event.title}</h2>
               <div className="mt-2 space-y-1 text-base text-muted-foreground">

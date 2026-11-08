@@ -25,12 +25,12 @@ export default async function NewsIndexPage() {
           description="Add News documents in Sanity Studio to populate this list. Placeholder layout stays on-brand until then."
         />
       ) : (
-        <ul className="divide-y divide-border border-y border-border">
+        <ul className="divide-y divide-border/80 border-y border-border/80">
           {news.map((item) => (
-            <li key={item._id} className="py-6">
+            <li key={item._id} className="group -mx-4 rounded-xl px-4 py-6 transition-colors hover:bg-ohs-navy-soft/50">
               <Link
                 href={`/news/${item.slug}`}
-                className="text-xl font-semibold text-ohs-navy hover:underline"
+                className="text-xl font-semibold text-ohs-navy underline-offset-4 group-hover:underline"
               >
                 {item.title}
               </Link>

@@ -52,21 +52,13 @@ export default async function HomePage() {
   return (
     <div>
       {/* Brand hero — one composition: logo, headline, support, CTAs, dominant image */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-ohs-navy via-[#0464a3] to-ohs-sky pb-8">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:py-20">
+      <section className="hero-mesh relative overflow-hidden pb-10">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
           <div className="animate-fade-up space-y-6 text-white">
-            <Image
-              src="/ohs-logo.png"
-              alt="Okotoks Humane Society logo"
-              width={112}
-              height={112}
-              priority
-              className="h-24 w-24 rounded-full bg-white p-1.5 shadow-md sm:h-28 sm:w-28"
-            />
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              {welcomeTitle}
+              <span className="text-gradient-sky">{welcomeTitle}</span>
             </h1>
-            <p className="max-w-xl text-lg text-white/90 sm:text-xl">
+            <p className="max-w-xl text-lg text-white/85 sm:text-xl">
               {welcomeSummary}
             </p>
             <div className="animate-fade-up-delay flex flex-wrap gap-3">
@@ -77,19 +69,19 @@ export default async function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white bg-transparent text-white hover:bg-white/15"
+                className="border-white/70 bg-white/5 text-white backdrop-blur hover:border-white hover:bg-white/15"
               >
                 <Link href="/donate">Donate</Link>
               </Button>
             </div>
             {!isSanityConfigured ? (
-              <p className="animate-fade-up-delay-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white/95">
+              <p className="animate-fade-up-delay-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm text-white/90 backdrop-blur">
                 CMS not connected yet — set Sanity env vars to edit this page in
                 Studio.
               </p>
             ) : null}
           </div>
-          <div className="animate-fade-up-delay relative min-h-[240px] overflow-hidden rounded-2xl shadow-lg lg:min-h-[360px]">
+          <div className="animate-fade-up-delay relative min-h-[240px] overflow-hidden rounded-3xl shadow-lifted ring-1 ring-white/10 lg:min-h-[380px]">
             <Image
               src="/placeholders/hero-pets.jpg"
               alt="Two dogs outdoors — temporary placeholder photo until shelter photos are added"
@@ -120,13 +112,16 @@ export default async function HomePage() {
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {waysToHelp.map((item) => (
-              <article key={item.title} className="flex flex-col overflow-hidden">
+              <article
+                key={item.title}
+                className="hover-lift group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card p-4 shadow-soft hover:shadow-elevated"
+              >
                 <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl">
                   <Image
                     src={item.image}
                     alt={item.alt}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
@@ -159,7 +154,7 @@ export default async function HomePage() {
           </div>
           <ul className="w-full max-w-xl space-y-4">
             {news.slice(0, 3).length === 0 ? (
-              <li className="rounded-xl border border-dashed border-ohs-sky/40 bg-white/70 px-5 py-6 text-base text-muted-foreground">
+              <li className="rounded-2xl border border-dashed border-ohs-sky/40 bg-white/70 px-5 py-6 text-base text-muted-foreground">
                 No news posts yet. Add News documents in Sanity Studio to
                 populate this list.
               </li>
@@ -168,7 +163,7 @@ export default async function HomePage() {
                 <li key={item._id}>
                   <Link
                     href={`/news/${item.slug}`}
-                    className="block rounded-xl bg-white px-5 py-4 shadow-sm transition hover:ring-2 hover:ring-ohs-sky"
+                    className="hover-lift block rounded-2xl border border-border/80 bg-white px-5 py-4 shadow-soft transition-shadow hover:shadow-elevated hover:ring-2 hover:ring-ohs-sky/60"
                   >
                     <p className="text-lg font-semibold text-ohs-navy">{item.title}</p>
                     {item.summary ? (
@@ -197,7 +192,7 @@ export default async function HomePage() {
             </Button>
           </div>
           {events.slice(0, 3).length === 0 ? (
-            <p className="rounded-xl border border-dashed border-border bg-white px-5 py-8 text-base text-muted-foreground">
+            <p className="rounded-2xl border border-dashed border-border bg-white px-5 py-8 text-base text-muted-foreground">
               No events scheduled yet. Staff can publish Event documents in Studio.
             </p>
           ) : (
@@ -205,7 +200,7 @@ export default async function HomePage() {
               {events.slice(0, 3).map((item) => (
                 <li
                   key={item._id}
-                  className="rounded-xl border border-border bg-white p-5 shadow-sm"
+                  className="hover-lift rounded-2xl border border-border/80 bg-white p-5 shadow-soft hover:shadow-elevated"
                 >
                   <p className="text-lg font-semibold text-ohs-navy">{item.title}</p>
                   {item.startDate ? (
