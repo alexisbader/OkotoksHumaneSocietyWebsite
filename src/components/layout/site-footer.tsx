@@ -50,16 +50,6 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/studio"
-                className="group inline-flex min-h-11 items-center rounded-md px-1 text-white/55 transition-colors hover:text-white/80"
-              >
-                <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-white/50">
-                  Studio
-                </span>
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
