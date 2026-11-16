@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 
 import { WaveDivider } from "@/components/brand/wave-divider";
+import { SocialIcon } from "@/components/brand/social-icons";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { getSiteSettings } from "@/sanity/lib/fetch";
 
@@ -45,8 +45,8 @@ export async function SiteFooter() {
             </span>
           </Link>
           <p className="max-w-md text-base leading-relaxed text-white/75">
-            Caring for animals and connecting them with loving homes in the
-            Okotoks community.
+            {settings?.footerTagline ||
+              "Caring for animals and connecting them with loving homes in the Okotoks community."}
           </p>
           {socialLinks.length ? (
             <ul className="flex flex-wrap gap-3">
@@ -56,10 +56,12 @@ export async function SiteFooter() {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-sm text-white/85 transition-colors hover:border-white/40 hover:text-white"
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/85 transition-colors hover:border-white/40 hover:bg-white/10 hover:text-white"
                   >
-                    {PLATFORM_LABELS[link.platform ?? "other"] ?? link.platform}
-                    <ExternalLink className="size-3.5" />
+                    <span className="sr-only">
+                      {PLATFORM_LABELS[link.platform ?? "other"] ?? link.platform}
+                    </span>
+                    <SocialIcon platform={link.platform} className="size-4" />
                   </a>
                 </li>
               ))}

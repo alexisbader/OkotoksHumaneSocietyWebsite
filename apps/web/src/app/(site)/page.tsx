@@ -8,30 +8,27 @@ import { urlFor } from "@/sanity/lib/image";
 import { getEventsList, getHomePage, getNewsList } from "@/sanity/lib/fetch";
 import { isSanityConfigured } from "@/sanity/env";
 
-const waysToHelp = [
+const fallbackWaysToHelp = [
   {
     title: "Donate",
     description: "Your gift supports food, medical care, and shelter for animals in need.",
     href: "/donate/individual",
-    cta: "Give today",
-    image: "/placeholders/community.jpg",
-    alt: "Person holding a small dog — temporary placeholder photo",
+    ctaLabel: "Give today",
+    imageUrl: "/placeholders/community.jpg",
   },
   {
     title: "Volunteer",
     description: "Lend a hand with events, adoption days, and day-to-day shelter support.",
     href: "/volunteer/openings",
-    cta: "See opportunities",
-    image: "/placeholders/volunteer.jpg",
-    alt: "Happy dog in grass — temporary placeholder photo",
+    ctaLabel: "See opportunities",
+    imageUrl: "/placeholders/volunteer.jpg",
   },
   {
     title: "Careers",
     description: "Join our team — browse open roles at Okotoks Humane Society.",
     href: "/careers",
-    cta: "View openings",
-    image: "/placeholders/adopt.jpg",
-    alt: "Golden retriever resting outdoors — temporary placeholder photo",
+    ctaLabel: "View openings",
+    imageUrl: "/placeholders/adopt.jpg",
   },
 ] as const;
 
@@ -49,6 +46,28 @@ export default async function HomePage() {
   const buildingImageUrl = home?.buildingImage
     ? urlFor(home.buildingImage).width(1200).height(900).fit("crop").url()
     : null;
+
+  const waysToHelpHeading = home?.waysToHelpHeading || "Ways to help";
+  const waysToHelpSubheading =
+    home?.waysToHelpSubheading ||
+    "Whether you donate, volunteer, or join our team, you make a difference.";
+  const waysToHelp = home?.waysToHelp?.length
+    ? home.waysToHelp.map((item) => ({
+        title: item.title || "",
+        description: item.description || "",
+        href: item.href || "#",
+        ctaLabel: item.ctaLabel || "Learn more",
+        imageUrl: item.image ? urlFor(item.image).width(640).height(480).fit("crop").url() : null,
+      }))
+    : fallbackWaysToHelp;
+
+  const newsSectionHeading = home?.newsSectionHeading || "Latest news";
+  const newsSectionSubheading =
+    home?.newsSectionSubheading || "Shelter updates and community stories.";
+  const eventsSectionHeading = home?.eventsSectionHeading || "Upcoming events";
+  const eventsSectionSubheading =
+    home?.eventsSectionSubheading ||
+    "Join us for fundraisers, adoption days, and community gatherings.";
 
   return (
     <div>
@@ -117,10 +136,8 @@ export default async function HomePage() {
       <section className="bg-background px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-6xl space-y-8">
           <div className="max-w-2xl space-y-2">
-            <h2 className="text-3xl font-bold text-ohs-navy">Ways to help</h2>
-            <p className="text-lg text-muted-foreground">
-              Whether you donate, volunteer, or join our team, you make a difference.
-            </p>
+            <h2 className="text-3xl font-bold text-ohs-navy">{waysToHelpHeading}</h2>
+            <p className="text-lg text-muted-foreground">{waysToHelpSubheading}</p>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {waysToHelp.map((item) => (
@@ -128,21 +145,23 @@ export default async function HomePage() {
                 key={item.title}
                 className="hover-lift group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card p-4 shadow-soft hover:shadow-elevated"
               >
-                <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl">
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
+                {item.imageUrl ? (
+                  <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                ) : null}
                 <h3 className="text-2xl font-semibold text-ohs-navy">{item.title}</h3>
                 <p className="mt-2 flex-1 text-base text-muted-foreground">
                   {item.description}
                 </p>
                 <Button asChild variant="link" className="mt-3 h-auto justify-start px-0 text-base">
-                  <Link href={item.href}>{item.cta} →</Link>
+                  <Link href={item.href}>{item.ctaLabel} →</Link>
                 </Button>
               </article>
             ))}
@@ -156,10 +175,8 @@ export default async function HomePage() {
       <section className="bg-ohs-navy-soft px-4 py-16 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-md space-y-3">
-            <h2 className="text-3xl font-bold text-ohs-navy">Latest news</h2>
-            <p className="text-lg text-muted-foreground">
-              Shelter updates and community stories.
-            </p>
+            <h2 className="text-3xl font-bold text-ohs-navy">{newsSectionHeading}</h2>
+            <p className="text-lg text-muted-foreground">{newsSectionSubheading}</p>
             <Button asChild variant="outline">
               <Link href="/news">View all news</Link>
             </Button>
@@ -194,10 +211,8 @@ export default async function HomePage() {
         <div className="mx-auto max-w-6xl space-y-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold text-ohs-navy">Upcoming events</h2>
-              <p className="text-lg text-muted-foreground">
-                Join us for fundraisers, adoption days, and community gatherings.
-              </p>
+              <h2 className="text-3xl font-bold text-ohs-navy">{eventsSectionHeading}</h2>
+              <p className="text-lg text-muted-foreground">{eventsSectionSubheading}</p>
             </div>
             <Button asChild variant="outline">
               <Link href="/events">All events</Link>

@@ -5,12 +5,20 @@ import type { Metadata } from "next";
 
 import { PortableBody } from "@/components/portable-text";
 import { ProgressBar } from "@/components/progress-bar";
+import { StatusBadge } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/sanity/lib/image";
 import { getFundraisingCampaignBySlug } from "@/sanity/lib/fetch";
 
 type Props = {
   params: Promise<{ slug: string }>;
+};
+
+const OCCASION_LABELS: Record<string, string> = {
+  birthday: "Birthday",
+  wedding: "Wedding",
+  memorial: "Memorial",
+  other: "Fundraiser",
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -47,6 +55,9 @@ export default async function FundraisingCampaignPage({ params }: Props) {
       ) : null}
 
       <header className="space-y-2">
+        {campaign.occasion ? (
+          <StatusBadge label={OCCASION_LABELS[campaign.occasion] || campaign.occasion} />
+        ) : null}
         <h1 className="text-3xl font-bold tracking-tight text-ohs-navy sm:text-4xl">
           {campaign.title}
         </h1>

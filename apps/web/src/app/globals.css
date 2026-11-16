@@ -157,3 +157,19 @@ h3 {
     animation: none;
   }
 }
+
+/* Third-party embed HTML (e.g. newsletter signup) is CMS-controlled and may
+   assume a fixed desktop width — constrain it so it can't force horizontal
+   scroll on mobile. */
+.newsletter-embed {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.newsletter-embed img,
+.newsletter-embed iframe,
+.newsletter-embed form,
+.newsletter-embed input,
+.newsletter-embed button {
+  max-width: 100%;
+}

@@ -21,5 +21,19 @@ export const personalizedDonationPageType = defineType({
       type: 'string',
       validation: (rule) => rule.email(),
     }),
+    defineField({
+      name: 'applyHeading',
+      title: 'Application card heading',
+      type: 'string',
+      initialValue: 'Apply for a personalized fundraising page',
+    }),
+    defineField({
+      name: 'applyDescription',
+      title: 'Application card description',
+      type: 'text',
+      rows: 2,
+      initialValue:
+        "Tell us about your occasion and we'll follow up to set up your campaign and shareable link.",
+    }),
   ],
 })

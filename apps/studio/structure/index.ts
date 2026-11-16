@@ -22,7 +22,6 @@ export const structure: StructureResolver = (S) =>
             .title('Donate')
             .items([
               singleton(S, 'sponsorshipsPage', 'Sponsorships (page)'),
-              S.documentTypeListItem('sponsorshipPackage').title('Sponsorship Packages'),
               singleton(S, 'corporatePage', 'Corporate'),
               singleton(S, 'individualDonationPage', 'Individual'),
               singleton(S, 'personalizedDonationPage', 'Personalized Donation Page'),

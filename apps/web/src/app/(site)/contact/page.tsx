@@ -1,9 +1,10 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { ExternalLink, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { ContactForm } from "@/components/contact-form";
 import { PageHero } from "@/components/page-hero";
+import { SocialIcon } from "@/components/brand/social-icons";
 import {
   Card,
   CardContent,
@@ -12,6 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getContactPage, getSiteSettings } from "@/sanity/lib/fetch";
+import { urlFor } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -30,6 +32,9 @@ const PLATFORM_LABELS: Record<string, string> = {
 export default async function ContactPage() {
   const [page, settings] = await Promise.all([getContactPage(), getSiteSettings()]);
   const socialLinks = (settings?.socialLinks ?? []).filter((link) => link.url);
+  const photoUrl = page?.photo
+    ? urlFor(page.photo).width(800).height(600).fit("crop").url()
+    : "/placeholders/community.jpg";
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -39,8 +44,12 @@ export default async function ContactPage() {
 
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-elevated">
             <Image
-              src="/placeholders/community.jpg"
-              alt="Person holding a small dog — temporary placeholder photo"
+              src={photoUrl}
+              alt={
+                page?.photo
+                  ? "Okotoks Humane Society"
+                  : "Person holding a small dog — temporary placeholder photo"
+              }
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 40vw"
@@ -76,10 +85,12 @@ export default async function ContactPage() {
                       href={link.url}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border/80 bg-white px-3.5 py-1.5 text-sm font-medium text-ohs-navy shadow-soft transition-colors hover:border-ohs-sky hover:bg-ohs-sky-soft"
+                      className="flex size-10 items-center justify-center rounded-full bg-ohs-sky-soft text-ohs-navy shadow-soft transition-colors hover:bg-ohs-sky"
                     >
-                      {PLATFORM_LABELS[link.platform ?? "other"] ?? link.platform}
-                      <ExternalLink className="size-3.5" />
+                      <span className="sr-only">
+                        {PLATFORM_LABELS[link.platform ?? "other"] ?? link.platform}
+                      </span>
+                      <SocialIcon platform={link.platform} className="size-4" />
                     </a>
                   </li>
                 ))}

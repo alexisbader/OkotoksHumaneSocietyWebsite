@@ -57,6 +57,13 @@ export const volunteerPositionType = defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
+    defineField({
+      name: 'applicationInstructions',
+      title: 'Application instructions',
+      description: 'Shown above the Apply button — e.g. what to include when emailing about this position.',
+      type: 'array',
+      of: [{type: 'block'}],
+    }),
   ],
   orderings: [
     {

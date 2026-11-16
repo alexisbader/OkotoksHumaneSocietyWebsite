@@ -11,17 +11,17 @@ const components: PortableTextComponents = {
       <h3 className="mt-6 mb-2 text-xl font-semibold text-ohs-navy">{children}</h3>
     ),
     normal: ({ children }) => (
-      <p className="mb-4 text-lg leading-relaxed text-muted-foreground">{children}</p>
+      <p className="mb-4 text-lg leading-relaxed break-words text-muted-foreground">{children}</p>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-4 list-disc space-y-1 pl-5 text-lg text-muted-foreground">
+      <ul className="mb-4 list-disc space-y-1 break-words pl-5 text-lg text-muted-foreground">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-4 list-decimal space-y-1 pl-5 text-lg text-muted-foreground">
+      <ol className="mb-4 list-decimal space-y-1 break-words pl-5 text-lg text-muted-foreground">
         {children}
       </ol>
     ),
@@ -39,7 +39,7 @@ export function PortableBody({ value }: { value?: PortableBlock[] }) {
 const compactComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-2 text-sm leading-relaxed text-muted-foreground last:mb-0">{children}</p>
+      <p className="mb-2 break-words text-sm leading-relaxed text-muted-foreground last:mb-0">{children}</p>
     ),
   },
 };

@@ -8,6 +8,12 @@ export const siteSettingsType = defineType({
   icon: CogIcon,
   fields: [
     defineField({
+      name: 'footerTagline',
+      title: 'Footer tagline',
+      type: 'string',
+      initialValue: 'Caring for animals and connecting them with loving homes in the Okotoks community.',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Social media links',
       type: 'array',

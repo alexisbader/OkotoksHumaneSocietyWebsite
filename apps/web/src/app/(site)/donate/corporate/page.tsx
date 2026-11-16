@@ -22,7 +22,7 @@ export default async function CorporatePage() {
       <div className="grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>Event sponsorship</CardTitle>
+            <CardTitle>{page?.eventSponsorship?.title || "Event sponsorship"}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {page?.eventSponsorship?.description?.length ? (
@@ -42,7 +42,7 @@ export default async function CorporatePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Website logo sponsorship</CardTitle>
+            <CardTitle>{page?.logoSponsorship?.title || "Website logo sponsorship"}</CardTitle>
           </CardHeader>
           <CardContent>
             {page?.logoSponsorship?.description?.length ? (
@@ -57,7 +57,7 @@ export default async function CorporatePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Room / kennel sponsorship</CardTitle>
+            <CardTitle>{page?.kennelSponsorship?.title || "Room / kennel sponsorship"}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {page?.kennelSponsorship?.description?.length ? (

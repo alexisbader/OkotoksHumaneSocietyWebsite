@@ -14,7 +14,6 @@ import {newsPageType} from './newsPage'
 import {personalizedDonationPageType} from './personalizedDonationPage'
 import {privacyPolicyPageType} from './privacyPolicyPage'
 import {siteSettingsType} from './siteSettings'
-import {sponsorshipPackageType} from './sponsorshipPackage'
 import {sponsorshipsPageType} from './sponsorshipsPage'
 import {volunteerPositionType} from './volunteerPosition'
 import {wishlistPageType} from './wishlistPage'
@@ -37,7 +36,6 @@ export const schemaTypes = [
   siteSettingsType,
 
   // Collections
-  sponsorshipPackageType,
   fundraisingCampaignType,
   volunteerPositionType,
   jobPostingType,

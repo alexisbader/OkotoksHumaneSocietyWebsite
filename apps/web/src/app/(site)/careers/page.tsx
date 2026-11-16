@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
 
-import { ApplyForm } from "@/components/apply-form";
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
-import { PortableBody } from "@/components/portable-text";
-import { getCareersPage, getJobsList, getSiteSettings } from "@/sanity/lib/fetch";
+import { CompactPortableText, PortableBody } from "@/components/portable-text";
+import { Button } from "@/components/ui/button";
+import { getCareersPage, getJobsList } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Careers",
 };
 
 export default async function CareersPage() {
-  const [page, jobs, settings] = await Promise.all([
-    getCareersPage(),
-    getJobsList(),
-    getSiteSettings(),
-  ]);
+  const [page, jobs] = await Promise.all([getCareersPage(), getJobsList()]);
 
   return (
     <div className="mx-auto max-w-3xl space-y-10 px-4 py-12 sm:px-6">
@@ -35,28 +31,63 @@ export default async function CareersPage() {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6">
                   <div>
                     <h2 className="text-xl font-semibold text-ohs-navy">{job.title}</h2>
-                    <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-base text-muted-foreground">
-                      {job.employmentType ? <span>{job.employmentType}</span> : null}
-                      {job.location ? <span>{job.location}</span> : null}
-                      {job.postedAt ? (
-                        <span>Posted {new Date(job.postedAt).toLocaleDateString()}</span>
-                      ) : null}
-                    </div>
                     {job.summary ? (
-                      <p className="mt-2 text-base text-muted-foreground">{job.summary}</p>
+                      <p className="mt-1 text-base text-muted-foreground">{job.summary}</p>
                     ) : null}
                   </div>
-                  <span className="shrink-0 text-base font-medium text-ohs-navy underline-offset-4 group-open:underline">
-                    Apply
+                  <span className="shrink-0 text-base font-medium text-ohs-navy underline-offset-4 hover:underline">
+                    <span className="group-open:hidden">See more</span>
+                    <span className="hidden group-open:inline">See less</span>
                   </span>
                 </summary>
-                <div className="border-t border-border/80 p-6 pt-5">
-                  <ApplyForm
-                    kind="job"
-                    slug={job.slug}
-                    submitLabel="Submit application"
-                    consentText={settings?.applicationConsentText}
-                  />
+                <div className="space-y-5 border-t border-border/80 p-6 pt-5">
+                  {job.employmentType ? (
+                    <p className="text-base text-muted-foreground">
+                      <span className="font-semibold text-ohs-navy">Type:</span>{" "}
+                      {job.employmentType}
+                    </p>
+                  ) : null}
+                  {job.location ? (
+                    <p className="text-base text-muted-foreground">
+                      <span className="font-semibold text-ohs-navy">Location:</span>{" "}
+                      {job.location}
+                    </p>
+                  ) : null}
+                  {job.postedAt ? (
+                    <p className="text-base text-muted-foreground">
+                      <span className="font-semibold text-ohs-navy">Posted:</span>{" "}
+                      {new Date(job.postedAt).toLocaleDateString()}
+                    </p>
+                  ) : null}
+                  <div>
+                    <p className="text-base font-semibold text-ohs-navy">Description:</p>
+                    {job.body?.length ? (
+                      <PortableBody value={job.body} />
+                    ) : (
+                      <p className="text-base text-muted-foreground">
+                        No additional details yet — add a Body in Sanity Studio.
+                      </p>
+                    )}
+                  </div>
+                  {job.applicationInstructions?.length ? (
+                    <div>
+                      <p className="text-base font-semibold text-ohs-navy">How to apply:</p>
+                      <div className="mt-2 rounded-xl border border-border/80 bg-ohs-navy-soft/40 px-4 py-3">
+                        <CompactPortableText value={job.applicationInstructions} />
+                      </div>
+                    </div>
+                  ) : null}
+                  {job.applicationEmail ? (
+                    <Button asChild size="lg">
+                      <a
+                        href={`mailto:${job.applicationEmail.trim()}?subject=${encodeURIComponent(
+                          job.title || "Job application",
+                        )}`}
+                      >
+                        Apply for this position
+                      </a>
+                    </Button>
+                  ) : null}
                 </div>
               </details>
             </li>

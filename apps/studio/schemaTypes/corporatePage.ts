@@ -19,6 +19,13 @@ export const corporatePageType = defineType({
       type: 'object',
       fields: [
         defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+          initialValue: 'Event sponsorship',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
           name: 'description',
           title: 'Description',
           type: 'array',
@@ -39,6 +46,13 @@ export const corporatePageType = defineType({
       type: 'object',
       fields: [
         defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+          initialValue: 'Website logo sponsorship',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
           name: 'description',
           title: 'Description',
           type: 'array',
@@ -53,6 +67,13 @@ export const corporatePageType = defineType({
       description: 'Links through to the Sponsorships page.',
       type: 'object',
       fields: [
+        defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+          initialValue: 'Room / kennel sponsorship',
+          validation: (rule) => rule.required(),
+        }),
         defineField({
           name: 'description',
           title: 'Description',

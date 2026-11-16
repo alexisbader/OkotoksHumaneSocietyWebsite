@@ -28,10 +28,12 @@ export default async function PersonalizedDonationPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Apply for a personalized fundraising page</CardTitle>
+          <CardTitle>
+            {page?.applyHeading || "Apply for a personalized fundraising page"}
+          </CardTitle>
           <CardDescription>
-            Tell us about your occasion and we&apos;ll follow up to set up your
-            campaign and shareable link.
+            {page?.applyDescription ||
+              "Tell us about your occasion and we'll follow up to set up your campaign and shareable link."}
           </CardDescription>
         </CardHeader>
         <CardContent>

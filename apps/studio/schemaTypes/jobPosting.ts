@@ -61,6 +61,13 @@ export const jobPostingType = defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
+    defineField({
+      name: 'applicationInstructions',
+      title: 'Application instructions',
+      description: 'Shown above the Apply button — e.g. what to include when emailing about this role.',
+      type: 'array',
+      of: [{type: 'block'}],
+    }),
   ],
   orderings: [
     {

@@ -19,5 +19,11 @@ export const contactPageType = defineType({
       type: 'string',
       validation: (rule) => rule.required().email(),
     }),
+    defineField({
+      name: 'photo',
+      title: 'Photo',
+      type: 'image',
+      options: {hotspot: true},
+    }),
   ],
 })

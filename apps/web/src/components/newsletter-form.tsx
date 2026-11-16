@@ -43,38 +43,36 @@ export function NewsletterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-start">
-      <div className="flex-1 space-y-1.5">
-        <label htmlFor="newsletter-email" className="sr-only">
-          Email address
-        </label>
-        <Input
-          id="newsletter-email"
-          name="email"
-          type="email"
-          required
-          placeholder="you@example.com"
-          className="border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:border-ohs-sky-bright"
-        />
-        <p className="text-xs text-white/60">
-          By signing up, you agree to our{" "}
-          <a href="/privacy-policy" className="underline underline-offset-2 hover:text-white">
-            Privacy Policy
-          </a>
-          .
-        </p>
+    <form onSubmit={onSubmit} className="space-y-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+        <div className="flex-1 space-y-1.5">
+          <label htmlFor="newsletter-email" className="sr-only">
+            Email address
+          </label>
+          <Input
+            id="newsletter-email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            className="border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:border-ohs-sky-bright"
+          />
+          <p className="text-xs text-white/60">
+            By signing up, you agree to our{" "}
+            <a href="/privacy-policy" className="underline underline-offset-2 hover:text-white">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
+        <Button type="submit" variant="secondary" disabled={status === "loading"} className="shrink-0">
+          {status === "loading" ? "Signing up…" : "Sign up"}
+        </Button>
       </div>
-      <Button type="submit" variant="secondary" disabled={status === "loading"} className="shrink-0">
-        {status === "loading" ? "Signing up…" : "Sign up"}
-      </Button>
       {message ? (
         <p
           role="status"
-          className={
-            status === "success"
-              ? "text-sm text-ohs-sky-bright sm:basis-full"
-              : "text-sm text-red-300 sm:basis-full"
-          }
+          className={status === "success" ? "text-sm text-ohs-sky-bright" : "text-sm text-red-300"}
         >
           {message}
         </p>

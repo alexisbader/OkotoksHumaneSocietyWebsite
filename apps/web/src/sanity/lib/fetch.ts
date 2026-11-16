@@ -22,7 +22,6 @@ import {
   personalizedDonationPageQuery,
   privacyPolicyPageQuery,
   siteSettingsQuery,
-  sponsorshipPackagesQuery,
   sponsorshipsPageQuery,
   volunteerPositionBySlugQuery,
   volunteerPositionsListQuery,
@@ -38,26 +37,49 @@ export type PortableBlock = {
 
 type ImageValue = SanityImageSource & { asset?: { _ref?: string } };
 
+export type WaysToHelpCard = {
+  title?: string;
+  description?: string;
+  image?: ImageValue;
+  ctaLabel?: string;
+  href?: string;
+};
+
 export type HomePageDoc = {
   heroHeading?: string;
   heroSubheading?: string;
   buildingImage?: ImageValue;
   aboutHeading?: string;
   aboutBody?: PortableBlock[];
+  waysToHelpHeading?: string;
+  waysToHelpSubheading?: string;
+  waysToHelp?: WaysToHelpCard[];
+  newsSectionHeading?: string;
+  newsSectionSubheading?: string;
+  eventsSectionHeading?: string;
+  eventsSectionSubheading?: string;
 };
 
-export type SponsorshipsPageDoc = { intro?: PortableBlock[] };
-
-export type SponsorshipPackageDoc = {
-  _id: string;
-  name?: string;
+export type SponsorshipBenefit = {
+  title?: string;
   description?: string;
-  price?: number;
-  status?: "available" | "soldOut";
-  image?: ImageValue;
+};
+
+export type SponsorshipsPageDoc = {
+  intro?: PortableBlock[];
+  whyHeading?: string;
+  whyIntro?: string;
+  whyBenefits?: SponsorshipBenefit[];
+  opportunitiesHeading?: string;
+  termsNote?: string;
+  availabilityNote?: string;
+  taxReceiptNote?: string;
+  closingHeading?: string;
+  closingBody?: PortableBlock[];
 };
 
 export type CorporateSectionDoc = {
+  title?: string;
   description?: PortableBlock[];
   contactEmail?: string;
 };
@@ -74,6 +96,8 @@ export type IndividualDonationPageDoc = { intro?: PortableBlock[] };
 export type PersonalizedDonationPageDoc = {
   intro?: PortableBlock[];
   applicationEmail?: string;
+  applyHeading?: string;
+  applyDescription?: string;
 };
 
 export type WishlistItem = { itemName?: string; notes?: string };
@@ -89,6 +113,7 @@ export type FundraisingCampaignDoc = {
   slug?: string;
   occasion?: string;
   organizerName?: string;
+  organizerEmail?: string;
   coverImage?: ImageValue;
   story?: PortableBlock[];
   goalAmount?: number;
@@ -105,7 +130,10 @@ export type CurrentOpeningsPageDoc = { intro?: PortableBlock[] };
 export type VolunteerPositionDoc = {
   _id: string;
   title?: string;
+  status?: "open" | "closed";
   summary?: string;
+  body?: PortableBlock[];
+  applicationInstructions?: PortableBlock[];
   postedAt?: string;
   applicationEmail?: string;
   slug?: string;
@@ -117,6 +145,8 @@ export type JobDoc = {
   _id?: string;
   title?: string;
   summary?: string;
+  body?: PortableBlock[];
+  applicationInstructions?: PortableBlock[];
   employmentType?: string;
   location?: string;
   postedAt?: string;
@@ -127,6 +157,7 @@ export type JobDoc = {
 export type ContactPageDoc = {
   intro?: string;
   email?: string;
+  photo?: ImageValue;
 };
 
 export type EventsPageDoc = { intro?: PortableBlock[] };
@@ -167,6 +198,7 @@ export type NewsletterSignupDoc = {
 };
 
 export type SiteSettingsDoc = {
+  footerTagline?: string;
   socialLinks?: SocialLink[];
   newsletterSignup?: NewsletterSignupDoc;
   donationConsentText?: PortableBlock[];
@@ -196,10 +228,6 @@ export function getHomePage() {
 
 export function getSponsorshipsPage() {
   return safeFetch<SponsorshipsPageDoc | null>(sponsorshipsPageQuery, {}, null);
-}
-
-export function getSponsorshipPackages() {
-  return safeFetch<SponsorshipPackageDoc[]>(sponsorshipPackagesQuery, {}, []);
 }
 
 export function getCorporatePage() {

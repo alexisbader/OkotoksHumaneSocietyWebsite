@@ -7,20 +7,29 @@ export const homePageQuery = groq`*[_type == "homePage"][0]{
   heroSubheading,
   buildingImage,
   aboutHeading,
-  aboutBody
+  aboutBody,
+  waysToHelpHeading,
+  waysToHelpSubheading,
+  waysToHelp,
+  newsSectionHeading,
+  newsSectionSubheading,
+  eventsSectionHeading,
+  eventsSectionSubheading
 }`;
 
 // ---- Donate ----
 
-export const sponsorshipsPageQuery = groq`*[_type == "sponsorshipsPage"][0]{ intro }`;
-
-export const sponsorshipPackagesQuery = groq`*[_type == "sponsorshipPackage"] | order(displayOrder asc){
-  _id,
-  name,
-  description,
-  price,
-  status,
-  image
+export const sponsorshipsPageQuery = groq`*[_type == "sponsorshipsPage"][0]{
+  intro,
+  whyHeading,
+  whyIntro,
+  whyBenefits,
+  opportunitiesHeading,
+  termsNote,
+  availabilityNote,
+  taxReceiptNote,
+  closingHeading,
+  closingBody
 }`;
 
 export const corporatePageQuery = groq`*[_type == "corporatePage"][0]{
@@ -34,7 +43,9 @@ export const individualDonationPageQuery = groq`*[_type == "individualDonationPa
 
 export const personalizedDonationPageQuery = groq`*[_type == "personalizedDonationPage"][0]{
   intro,
-  applicationEmail
+  applicationEmail,
+  applyHeading,
+  applyDescription
 }`;
 
 export const wishlistPageQuery = groq`*[_type == "wishlistPage"][0]{
@@ -48,6 +59,7 @@ export const fundraisingCampaignBySlugQuery = groq`*[_type == "fundraisingCampai
   "slug": slug.current,
   occasion,
   organizerName,
+  organizerEmail,
   coverImage,
   story,
   goalAmount,
@@ -66,7 +78,10 @@ export const currentOpeningsPageQuery = groq`*[_type == "currentOpeningsPage"][0
 export const volunteerPositionsListQuery = groq`*[_type == "volunteerPosition" && status == "open"] | order(postedAt desc){
   _id,
   title,
+  status,
   summary,
+  body,
+  applicationInstructions,
   postedAt,
   applicationEmail,
   "slug": slug.current
@@ -80,6 +95,8 @@ export const jobsListQuery = groq`*[_type == "jobPosting"] | order(postedAt desc
   _id,
   title,
   summary,
+  body,
+  applicationInstructions,
   employmentType,
   location,
   postedAt,
@@ -101,7 +118,8 @@ export const volunteerPositionBySlugQuery = groq`*[_type == "volunteerPosition" 
 
 export const contactPageQuery = groq`*[_type == "contactPage"][0]{
   intro,
-  email
+  email,
+  photo
 }`;
 
 // ---- Events ----
@@ -158,6 +176,7 @@ export const privacyPolicyPageQuery = groq`*[_type == "privacyPolicyPage"][0]{
 // ---- Site settings ----
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
+  footerTagline,
   socialLinks,
   newsletterSignup,
   donationConsentText,
